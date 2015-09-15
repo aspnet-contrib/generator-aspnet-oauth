@@ -14,7 +14,7 @@ using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.WebEncoders;
 
 namespace AspNet.Security.OAuth.<%= name %> {
-    public class <%= name %>AuthenticationMiddleware : OAuthAuthenticationMiddleware<<%= name %>AuthenticationOptions> {
+    public class <%= name %>AuthenticationMiddleware : OAuthMiddleware<<%= name %>AuthenticationOptions> {
         public <%= name %>AuthenticationMiddleware(
             [NotNull] RequestDelegate next,
             [NotNull] IDataProtectionProvider dataProtectionProvider,

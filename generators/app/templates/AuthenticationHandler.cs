@@ -16,7 +16,7 @@ using Microsoft.Framework.Internal;
 using Newtonsoft.Json.Linq;
 
 namespace AspNet.Security.OAuth.<%= name %> {
-    public class <%= name %>AuthenticationHandler : OAuthAuthenticationHandler<<%= name %>AuthenticationOptions> {
+    public class <%= name %>AuthenticationHandler : OAuthHandler<<%= name %>AuthenticationOptions> {
         public <%= name %>AuthenticationHandler([NotNull] HttpClient client)
             : base(client) {
         }

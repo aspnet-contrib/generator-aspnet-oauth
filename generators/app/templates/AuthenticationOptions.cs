@@ -11,7 +11,7 @@ namespace AspNet.Security.OAuth.<%= name %> {
     /// <summary>
     /// Defines a set of options used by <see cref="<%= name %>AuthenticationHandler"/>.
     /// </summary>
-    public class <%= name %>AuthenticationOptions : OAuthAuthenticationOptions {
+    public class <%= name %>AuthenticationOptions : OAuthOptions {
         public <%= name %>AuthenticationOptions() {
             AuthenticationScheme = <%= name %>AuthenticationDefaults.AuthenticationScheme;
             Caption = <%= name %>AuthenticationDefaults.Caption;

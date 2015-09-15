@@ -18,32 +18,32 @@ namespace AspNet.Security.OAuth.<%= name %> {
         public const string AuthenticationScheme = "<%= name %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthAuthenticationOptions.Caption"/>.
+        /// Default value for <see cref="OAuthOptions.Caption"/>.
         /// </summary>
         public const string Caption = "<%= name %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthAuthenticationOptions.ClaimsIssuer"/>.
+        /// Default value for <see cref="OAuthOptions.ClaimsIssuer"/>.
         /// </summary>
         public const string Issuer = "<%= name %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthAuthenticationOptions.CallbackPath"/>.
+        /// Default value for <see cref="OAuthOptions.CallbackPath"/>.
         /// </summary>
         public const string CallbackPath = "/signin-<%= name.toLowerCase() %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthAuthenticationOptions.AuthorizationEndpoint"/>.
+        /// Default value for <see cref="OAuthOptions.AuthorizationEndpoint"/>.
         /// </summary>
         public const string AuthorizationEndpoint = "<%= authorizationendpoint %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthAuthenticationOptions.TokenEndpoint"/>.
+        /// Default value for <see cref="OAuthOptions.TokenEndpoint"/>.
         /// </summary>
         public const string TokenEndpoint = "<%= tokenendpoint %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthAuthenticationOptions.UserInformationEndpoint"/>.
+        /// Default value for <see cref="OAuthOptions.UserInformationEndpoint"/>.
         /// </summary>
         public const string UserInformationEndpoint = "<%= userinformationendpoint %>";
     }
