@@ -17,14 +17,12 @@ namespace AspNet.Security.OAuth.<%= name %> {
     public class <%= name %>AuthenticationMiddleware : OAuthMiddleware<<%= name %>AuthenticationOptions> {
         public <%= name %>AuthenticationMiddleware(
             [NotNull] RequestDelegate next,
+            [NotNull] <%= name %>AuthenticationOptions options,
             [NotNull] IDataProtectionProvider dataProtectionProvider,
             [NotNull] ILoggerFactory loggerFactory,
             [NotNull] IUrlEncoder encoder,
-            [NotNull] IOptions<SharedAuthenticationOptions> externalOptions,
-            [NotNull] IOptions<<%= name %>AuthenticationOptions> options,
-            ConfigureOptions<<%= name %>AuthenticationOptions> configureOptions = null)
-            : base(next, dataProtectionProvider, loggerFactory,
-                   encoder, externalOptions, options, configureOptions) {
+            [NotNull] IOptions<SharedAuthenticationOptions> externalOptions)
+            : base(next, dataProtectionProvider, loggerFactory, encoder, externalOptions, options) {
         }
 
         protected override AuthenticationHandler<<%= name %>AuthenticationOptions> CreateHandler() {
