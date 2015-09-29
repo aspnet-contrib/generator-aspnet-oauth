@@ -14,7 +14,7 @@ namespace AspNet.Security.OAuth.<%= name %> {
     public class <%= name %>AuthenticationOptions : OAuthOptions {
         public <%= name %>AuthenticationOptions() {
             AuthenticationScheme = <%= name %>AuthenticationDefaults.AuthenticationScheme;
-            Caption = <%= name %>AuthenticationDefaults.Caption;
+            DisplayName = <%= name %>AuthenticationDefaults.DisplayName;
             ClaimsIssuer = <%= name %>AuthenticationDefaults.Issuer;
 
             CallbackPath = new PathString(<%= name %>AuthenticationDefaults.CallbackPath);

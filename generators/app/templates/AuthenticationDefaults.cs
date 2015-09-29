@@ -18,9 +18,9 @@ namespace AspNet.Security.OAuth.<%= name %> {
         public const string AuthenticationScheme = "<%= name %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthOptions.Caption"/>.
+        /// Default value for <see cref="OAuthOptions.DisplayName"/>.
         /// </summary>
-        public const string Caption = "<%= name %>";
+        public const string DisplayName = "<%= name %>";
 
         /// <summary>
         /// Default value for <see cref="OAuthOptions.ClaimsIssuer"/>.
