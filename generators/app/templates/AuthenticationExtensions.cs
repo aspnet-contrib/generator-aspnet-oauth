@@ -6,7 +6,7 @@
 
 using System;
 using AspNet.Security.OAuth.<%= name %>;
-using Microsoft.Framework.Internal;
+using Microsoft.Extensions.Internal;
 
 namespace Microsoft.AspNet.Builder {
     public static class <%= name %>AuthenticationExtensions {
