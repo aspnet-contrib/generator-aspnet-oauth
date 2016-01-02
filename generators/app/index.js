@@ -4,7 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
-  init: function() {
+  initializing: function() {
     this.templatedata = {};
     
     this.log(yosay('Welcome to the classy ' + chalk.yellow('ASP.NET OAuth Provider') + ' generator!'));    
