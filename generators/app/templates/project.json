@@ -6,28 +6,39 @@
 
     "projectUrl": "https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers",
     "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html",
+    
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers"
+    },
+    
+    "tags": [
+      "aspnetcore",
+      "authentication",
+      "oauth",
+      "security"
+    ]
 
     "dependencies": {
-        "AspNet.Security.OAuth.Extensions": {
-            "type": "build",
-            "version": "1.0.0-*"
-        },
-
-        "Microsoft.AspNet.Authentication.OAuth": "1.0.0-*",
-
-        "Microsoft.Extensions.NotNullAttribute.Sources": {
-            "type": "build",
-            "version": "1.0.0-*"
-        }
+      "AspNet.Security.OAuth.Extensions": { "target": "project", "type": "build" },
+      "JetBrains.Annotations": { "type": "build", "version": "10.1.4" },
+      "Microsoft.AspNetCore.Authentication.OAuth": "1.0.0-*"
+    },
+    
+    "buildOptions": {
+      "warningsAsErrors": true,
+      "nowarn": [ "CS1591" ],
+      "xmlDoc": true
     },
 
-    "frameworks": {
-        "dnx451": { },
+  "frameworks": {
+      "net451": { },
 
-        "dnxcore50": {
-            "dependencies": {
-                "System.Security.Claims": "4.0.1-*"
-            }
-        }
-    }
+      "netstandard1.3": {
+        "imports": [
+          "dotnet5.4",
+          "portable-net451+win8"
+        ]
+      }
+  }
 }
