@@ -17,7 +17,7 @@
       "authentication",
       "oauth",
       "security"
-    ]
+    ],
 
     "dependencies": {
       "AspNet.Security.OAuth.Extensions": { "target": "project", "type": "build" },
