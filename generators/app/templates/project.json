@@ -2,22 +2,26 @@
     "version": "1.0.0-*",
     "description": "ASP.NET 5 security middleware enabling <%= name %> authentication.",
     "authors": [ "<%= authorname %>" ],
-    "owners": [ "Kévin Chalet", "Jerrie Pelser" ],
-
-    "projectUrl": "https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers",
-    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html",
     
-    "repository": {
-      "type": "git",
-      "url": "git://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers"
+    "packOptions": {
+      "owners": [ "Kévin Chalet", "Jerrie Pelser" ],
+  
+      "projectUrl": "https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers",
+      "iconUrl": "https://avatars3.githubusercontent.com/u/7998081?s=64",
+      "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html",
+      
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers"
+      },
+      
+      "tags": [
+        "aspnetcore",
+        "authentication",
+        "oauth",
+        "security"
+      ],
     },
-    
-    "tags": [
-      "aspnetcore",
-      "authentication",
-      "oauth",
-      "security"
-    ],
 
     "dependencies": {
       "AspNet.Security.OAuth.Extensions": { "target": "project", "type": "build" },
