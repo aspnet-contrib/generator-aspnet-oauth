@@ -2,32 +2,47 @@
     "version": "1.0.0-*",
     "description": "ASP.NET 5 security middleware enabling <%= name %> authentication.",
     "authors": [ "<%= authorname %>" ],
-    "owners": [ "Kévin Chalet", "Jerrie Pelser" ],
-
-    "projectUrl": "https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers",
-    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html",
-
-    "dependencies": {
-        "AspNet.Security.OAuth.Extensions": {
-            "type": "build",
-            "version": "1.0.0-*"
-        },
-
-        "Microsoft.AspNet.Authentication.OAuth": "1.0.0-*",
-
-        "Microsoft.Extensions.NotNullAttribute.Sources": {
-            "type": "build",
-            "version": "1.0.0-*"
-        }
+    
+    "packOptions": {
+      "owners": [ "Kévin Chalet", "Jerrie Pelser" ],
+  
+      "projectUrl": "https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers",
+      "iconUrl": "https://avatars3.githubusercontent.com/u/7998081?s=64",
+      "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0.html",
+      
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers"
+      },
+      
+      "tags": [
+        "aspnetcore",
+        "authentication",
+        "oauth",
+        "security"
+      ],
     },
 
-    "frameworks": {
-        "dnx451": { },
+    "dependencies": {
+      "AspNet.Security.OAuth.Extensions": { "target": "project", "type": "build" },
+      "JetBrains.Annotations": { "type": "build", "version": "10.1.4" },
+      "Microsoft.AspNetCore.Authentication.OAuth": "1.0.0-*"
+    },
+    
+    "buildOptions": {
+      "warningsAsErrors": true,
+      "nowarn": [ "CS1591" ],
+      "xmlDoc": true
+    },
 
-        "dnxcore50": {
-            "dependencies": {
-                "System.Security.Claims": "4.0.1-*"
-            }
-        }
-    }
+  "frameworks": {
+      "net451": { },
+
+      "netstandard1.3": {
+        "imports": [
+          "dotnet5.4",
+          "portable-net451+win8"
+        ]
+      }
+  }
 }
