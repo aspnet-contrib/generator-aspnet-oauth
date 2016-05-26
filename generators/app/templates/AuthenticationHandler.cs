@@ -9,10 +9,11 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AspNet.Security.OAuth.Extensions;
-using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Authentication.OAuth;
-using Microsoft.AspNet.Http.Authentication;
-using Microsoft.Extensions.Internal;
+using JetBrains.Annotations;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
 namespace AspNet.Security.OAuth.<%= name %> {
@@ -31,7 +32,7 @@ namespace AspNet.Security.OAuth.<%= name %> {
             response.EnsureSuccessStatusCode();
 
             var payload = JObject.Parse(await response.Content.ReadAsStringAsync());
-            
+
             identity.AddOptionalClaim(ClaimTypes.NameIdentifier, <%= name %>AuthenticationHelper.GetIdentifier(payload), Options.ClaimsIssuer);
 
             // TODO: Add any optional claims, eg
@@ -47,7 +48,7 @@ namespace AspNet.Security.OAuth.<%= name %> {
             if (context.Principal?.Identity == null) {
                 return null;
             }
-                    
+
             return new AuthenticationTicket(context.Principal, context.Properties, context.Options.AuthenticationScheme);
         }
     }
