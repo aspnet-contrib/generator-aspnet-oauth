@@ -4,8 +4,7 @@
  * for more information concerning the license and the contributors participating to this project.
  */
 
-using Microsoft.AspNet.Authentication;
-using Microsoft.AspNet.Authentication.OAuth;
+using Microsoft.AspNetCore.Builder;
 
 namespace AspNet.Security.OAuth.<%= name %> {
     /// <summary>
@@ -18,17 +17,17 @@ namespace AspNet.Security.OAuth.<%= name %> {
         public const string AuthenticationScheme = "<%= name %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthOptions.DisplayName"/>.
+        /// Default value for <see cref="RemoteAuthenticationOptions.DisplayName"/>.
         /// </summary>
         public const string DisplayName = "<%= name %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthOptions.ClaimsIssuer"/>.
+        /// Default value for <see cref="AuthenticationOptions.ClaimsIssuer"/>.
         /// </summary>
         public const string Issuer = "<%= name %>";
 
         /// <summary>
-        /// Default value for <see cref="OAuthOptions.CallbackPath"/>.
+        /// Default value for <see cref="RemoteAuthenticationOptions.CallbackPath"/>.
         /// </summary>
         public const string CallbackPath = "/signin-<%= name.toLowerCase() %>";
 
