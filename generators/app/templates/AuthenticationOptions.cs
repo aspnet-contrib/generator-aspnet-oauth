@@ -23,7 +23,7 @@ namespace AspNet.Security.OAuth.<%= name %> {
             TokenEndpoint = <%= name %>AuthenticationDefaults.TokenEndpoint;
             UserInformationEndpoint = <%= name %>AuthenticationDefaults.UserInformationEndpoint;
 
-            SaveTokensAsClaims = false;
+            SaveTokens = false;
         }
     }
 }
