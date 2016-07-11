@@ -17,7 +17,7 @@ namespace AspNet.Security.OAuth.<%= name %> {
     public class <%= name %>AuthenticationMiddleware : OAuthMiddleware<<%= name %>AuthenticationOptions> {
         public <%= name %>AuthenticationMiddleware(
             [NotNull] RequestDelegate next,
-            [NotNull] <%= name %>AuthenticationOptions options,
+            [NotNull] IOptions<<%= name %>AuthenticationOptions> options,
             [NotNull] IDataProtectionProvider dataProtectionProvider,
             [NotNull] ILoggerFactory loggerFactory,
             [NotNull] UrlEncoder encoder,

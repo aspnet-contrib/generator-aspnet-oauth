@@ -6,14 +6,15 @@
 
 using System;
 using AspNet.Security.OAuth.<%= name %>;
-using Microsoft.Extensions.Internal;
+using JetBrains.Annotations;
+using Microsoft.Extensions.Options;
 
-namespace Microsoft.AspNet.Builder {
+namespace Microsoft.AspNetCore.Builder {
     public static class <%= name %>AuthenticationExtensions {
         public static IApplicationBuilder Use<%= name %>Authentication(
             [NotNull] this IApplicationBuilder app,
             [NotNull] <%= name %>AuthenticationOptions options) {
-            return app.UseMiddleware<<%= name %>AuthenticationMiddleware>(options);
+            return app.UseMiddleware<<%= name %>AuthenticationMiddleware>(Options.Create(options));
         }
 
         public static IApplicationBuilder Use<%= name %>Authentication(
@@ -22,7 +23,7 @@ namespace Microsoft.AspNet.Builder {
             var options = new <%= name %>AuthenticationOptions();
             configuration(options);
 
-            return app.UseMiddleware<<%= name %>AuthenticationMiddleware>(options);
+            return app.UseMiddleware<<%= name %>AuthenticationMiddleware>(Options.Create(options));
         }
     }
 }
