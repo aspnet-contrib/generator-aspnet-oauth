@@ -22,8 +22,6 @@ namespace AspNet.Security.OAuth.<%= name %> {
             AuthorizationEndpoint = <%= name %>AuthenticationDefaults.AuthorizationEndpoint;
             TokenEndpoint = <%= name %>AuthenticationDefaults.TokenEndpoint;
             UserInformationEndpoint = <%= name %>AuthenticationDefaults.UserInformationEndpoint;
-
-            SaveTokensAsClaims = false;
         }
     }
 }

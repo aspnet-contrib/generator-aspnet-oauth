@@ -38,18 +38,13 @@ namespace AspNet.Security.OAuth.<%= name %> {
             // TODO: Add any optional claims, eg
             //  .AddOptionalClaim("urn:<%= name.toLowerCase() %>:name", <%= name %>AuthenticationHelper.GetName(payload), Options.ClaimsIssuer)
 
-            var context = new OAuthCreatingTicketContext(Context, Options, Backchannel, tokens, payload) {
-                Principal = new ClaimsPrincipal(identity),
-                Properties = properties
-            };
+            var principal = new ClaimsPrincipal(identity);
+            var ticket = new AuthenticationTicket(principal, properties, Options.AuthenticationScheme);
 
+            var context = new OAuthCreatingTicketContext(ticket, Context, Options, Backchannel, tokens, payload);
             await Options.Events.CreatingTicket(context);
 
-            if (context.Principal?.Identity == null) {
-                return null;
-            }
-
-            return new AuthenticationTicket(context.Principal, context.Properties, context.Options.AuthenticationScheme);
+            return context.Ticket;
         }
     }
 }
