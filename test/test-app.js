@@ -3,22 +3,27 @@
 var path = require('path');
 var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
-var os = require('os');
 
 describe('aspnet-oauth:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
       .withOptions({ skipInstall: true })
-      .withPrompts({ someOption: true })
+      .withPrompts({
+        name: 'Foo',
+        authorname: 'John Smith',
+        authorizationendpoint: 'https://foo.local/auth',
+        tokenendpoint: 'https://foo.local/token',
+        userinformationendpoint: 'https://foo.local/user'
+      })
       .on('end', done);
   });
 
-  it('creates files', function () {
+  it('creates the provider code files', function () {
     assert.file([
-      'bower.json',
-      'package.json',
-      '.editorconfig',
-      '.jshintrc'
+      'AspNet.Security.OAuth.Foo/FooAuthenticationDefaults.cs',
+      'AspNet.Security.OAuth.Foo/FooAuthenticationExtensions.cs',
+      'AspNet.Security.OAuth.Foo/FooAuthenticationHandler.cs',
+      'AspNet.Security.OAuth.Foo/FooAuthenticationOptions.cs'
     ]);
   });
 });
