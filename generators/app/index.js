@@ -6,10 +6,10 @@ var yosay = require('yosay');
 module.exports = yeoman.generators.Base.extend({
   initializing: function() {
     this.templatedata = {};
-    
-    this.log(yosay('Welcome to the classy ' + chalk.yellow('ASP.NET OAuth Provider') + ' generator!'));    
+
+    this.log(yosay('Welcome to the classy ' + chalk.yellow('ASP.NET OAuth Provider') + ' generator!'));
   },
-  
+
   prompting: function () {
     var done = this.async();
 
@@ -18,7 +18,7 @@ module.exports = yeoman.generators.Base.extend({
       name: 'name',
       message: 'What is the name of the provider you want to create?',
       store: true
-    },   
+    },
     {
       type: 'input',
       name: 'authorname',
@@ -50,22 +50,19 @@ module.exports = yeoman.generators.Base.extend({
       this.templatedata.authorizationendpoint = props.authorizationendpoint;
       this.templatedata.tokenendpoint = props.tokenendpoint;
       this.templatedata.userinformationendpoint = props.userinformationendpoint;
-      
+
       this.name = props.name;
       this.applicationname = 'AspNet.Security.OAuth.' + props.name
-      
+
       done();
     }.bind(this));
   },
 
   writing: function() {
-    this.fs.copyTpl(this.templatePath('project.json'), this.applicationname + '/project.json', this.templatedata)
-    this.fs.copyTpl(this.templatePath('Project.xproj'), this.applicationname + '/' + this.applicationname + '.xproj', this.templatedata)
+    this.fs.copyTpl(this.templatePath('Project.csproj'), this.applicationname + '/' + this.applicationname + '.csproj', this.templatedata)
     this.fs.copyTpl(this.templatePath('AuthenticationDefaults.cs'), this.applicationname + '/' + this.name + 'AuthenticationDefaults.cs', this.templatedata)
     this.fs.copyTpl(this.templatePath('AuthenticationExtensions.cs'), this.applicationname + '/' + this.name + 'AuthenticationExtensions.cs', this.templatedata)
     this.fs.copyTpl(this.templatePath('AuthenticationHandler.cs'), this.applicationname + '/' + this.name + 'AuthenticationHandler.cs', this.templatedata)
-    this.fs.copyTpl(this.templatePath('AuthenticationHelper.cs'), this.applicationname + '/' + this.name + 'AuthenticationHelper.cs', this.templatedata)
-    this.fs.copyTpl(this.templatePath('AuthenticationMiddleware.cs'), this.applicationname + '/' + this.name + 'AuthenticationMiddleware.cs', this.templatedata)
     this.fs.copyTpl(this.templatePath('AuthenticationOptions.cs'), this.applicationname + '/' + this.name + 'AuthenticationOptions.cs', this.templatedata)
   },
 
