@@ -1,6 +1,6 @@
 {
   "name": "generator-aspnet-oauth",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Yeoman generator for OAuth Providers for ASP.NET Core",
   "license": "MIT",
   "main": "app/index.js",
