@@ -7,44 +7,76 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using AspNet.Security.OAuth.Extensions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
-using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 
-namespace AspNet.Security.OAuth.<%= name %> {
-    public class <%= name %>AuthenticationHandler : OAuthHandler<<%= name %>AuthenticationOptions> {
-        public <%= name %>AuthenticationHandler([NotNull] HttpClient client)
-            : base(client) {
+namespace AspNet.Security.OAuth.<%= name %>
+{
+    /// <summary>
+    /// Defines a handler for authentication using <%= name %>.
+    /// </summary>
+    public class <%= name %>AuthenticationHandler : OAuthHandler<<%= name %>AuthenticationOptions>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="<%= name %>AuthenticationHandler"/> class.
+        /// </summary>
+        /// <param name="options">The authentication options.</param>
+        /// <param name="logger">The logger to use.</param>
+        /// <param name="encoder">The URL encoder to use.</param>
+        /// <param name="clock">The system clock to use.</param>
+        public <%= name %>AuthenticationHandler(
+            [NotNull] IOptionsMonitor<<%= name %>AuthenticationOptions> options,
+            [NotNull] ILoggerFactory logger,
+            [NotNull] UrlEncoder encoder,
+            [NotNull] ISystemClock clock)
+            : base(options, logger, encoder, clock)
+        {
         }
 
-        protected override async Task<AuthenticationTicket> CreateTicketAsync([NotNull] ClaimsIdentity identity,
-            [NotNull] AuthenticationProperties properties, [NotNull] OAuthTokenResponse tokens) {
-            var request = new HttpRequestMessage(HttpMethod.Get, Options.UserInformationEndpoint);
+        /// <inheritdoc />
+        protected override async Task<AuthenticationTicket> CreateTicketAsync(
+            [NotNull] ClaimsIdentity identity,
+            [NotNull] AuthenticationProperties properties,
+            [NotNull] OAuthTokenResponse tokens)
+        {
+            var endpoint = Options.UserInformationEndpoint;
+
+            // TODO Append any additional query string parameters required
+            //endpoint = QueryHelpers.AddQueryString(endpoint, "token", tokens.AccessToken);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
+
+            // TODO Add any HTTP request headers required
+            //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
 
             var response = await Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, Context.RequestAborted);
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                Logger.LogError("An error occurred while retrieving the user profile: the remote server " +
+                                "returned a {Status} response with the following payload: {Headers} {Body}.",
+                                /* Status: */ response.StatusCode,
+                                /* Headers: */ response.Headers.ToString(),
+                                /* Body: */ await response.Content.ReadAsStringAsync());
+
+                throw new HttpRequestException("An error occurred while retrieving the user profile from <%= name %>.");
+            }
 
             var payload = JObject.Parse(await response.Content.ReadAsStringAsync());
 
-            identity.AddOptionalClaim(ClaimTypes.NameIdentifier, <%= name %>AuthenticationHelper.GetIdentifier(payload), Options.ClaimsIssuer);
-
-            // TODO: Add any optional claims, eg
-            //  .AddOptionalClaim("urn:<%= name.toLowerCase() %>:name", <%= name %>AuthenticationHelper.GetName(payload), Options.ClaimsIssuer)
-
             var principal = new ClaimsPrincipal(identity);
-            var ticket = new AuthenticationTicket(principal, properties, Options.AuthenticationScheme);
+            var context = new OAuthCreatingTicketContext(principal, properties, Context, Scheme, Options, Backchannel, tokens, payload);
+            context.RunClaimActions(payload);
 
-            var context = new OAuthCreatingTicketContext(ticket, Context, Options, Backchannel, tokens, payload);
             await Options.Events.CreatingTicket(context);
-
-            return context.Ticket;
+            return new AuthenticationTicket(context.Principal, context.Properties, Scheme.Name);
         }
     }
 }
