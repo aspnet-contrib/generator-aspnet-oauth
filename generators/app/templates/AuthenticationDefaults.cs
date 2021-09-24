@@ -22,31 +22,31 @@ namespace AspNet.Security.OAuth.<%= name %>
         /// <summary>
         /// Default value for <see cref="AuthenticationScheme.DisplayName"/>.
         /// </summary>
-        public const string DisplayName = "<%= name %>";
+        public static readonly string DisplayName = "<%= name %>";
 
         /// <summary>
         /// Default value for <see cref="AuthenticationSchemeOptions.ClaimsIssuer"/>.
         /// </summary>
-        public const string Issuer = "<%= name %>";
+        public static readonly string Issuer = "<%= name %>";
 
         /// <summary>
         /// Default value for <see cref="RemoteAuthenticationOptions.CallbackPath"/>.
         /// </summary>
-        public const string CallbackPath = "/signin-<%= name.toLowerCase() %>";
+        public static readonly string CallbackPath = "/signin-<%= name.toLowerCase() %>";
 
         /// <summary>
         /// Default value for <see cref="OAuthOptions.AuthorizationEndpoint"/>.
         /// </summary>
-        public const string AuthorizationEndpoint = "<%= authorizationendpoint %>";
+        public static readonly string AuthorizationEndpoint = "<%= authorizationendpoint %>";
 
         /// <summary>
         /// Default value for <see cref="OAuthOptions.TokenEndpoint"/>.
         /// </summary>
-        public const string TokenEndpoint = "<%= tokenendpoint %>";
+        public static readonly string TokenEndpoint = "<%= tokenendpoint %>";
 
         /// <summary>
         /// Default value for <see cref="OAuthOptions.UserInformationEndpoint"/>.
         /// </summary>
-        public const string UserInformationEndpoint = "<%= userinformationendpoint %>";
+        public static readonly string UserInformationEndpoint = "<%= userinformationendpoint %>";
     }
 }
