@@ -5,33 +5,30 @@
  */
 
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OAuth;
 
-namespace AspNet.Security.OAuth.<%= name %>
+namespace AspNet.Security.OAuth.<%= name %>;
+
+/// <summary>
+/// Defines a set of options used by <see cref="<%= name %>AuthenticationHandler"/>.
+/// </summary>
+public class <%= name %>AuthenticationOptions : OAuthOptions
 {
     /// <summary>
-    /// Defines a set of options used by <see cref="<%= name %>AuthenticationHandler"/>.
+    /// Initializes a new instance of the <see cref="<%= name %>AuthenticationOptions"/> class.
     /// </summary>
-    public class <%= name %>AuthenticationOptions : OAuthOptions
+    public <%= name %>AuthenticationOptions()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="<%= name %>AuthenticationOptions"/> class.
-        /// </summary>
-        public <%= name %>AuthenticationOptions()
-        {
-            ClaimsIssuer = <%= name %>AuthenticationDefaults.Issuer;
-            CallbackPath = <%= name %>AuthenticationDefaults.CallbackPath;
+        ClaimsIssuer = <%= name %>AuthenticationDefaults.Issuer;
+        CallbackPath = <%= name %>AuthenticationDefaults.CallbackPath;
 
-            AuthorizationEndpoint = <%= name %>AuthenticationDefaults.AuthorizationEndpoint;
-            TokenEndpoint = <%= name %>AuthenticationDefaults.TokenEndpoint;
-            UserInformationEndpoint = <%= name %>AuthenticationDefaults.UserInformationEndpoint;
+        AuthorizationEndpoint = <%= name %>AuthenticationDefaults.AuthorizationEndpoint;
+        TokenEndpoint = <%= name %>AuthenticationDefaults.TokenEndpoint;
+        UserInformationEndpoint = <%= name %>AuthenticationDefaults.UserInformationEndpoint;
 
-            // TODO Add any required scopes
-            // Scope.Add("?");
+        // TODO Add any required scopes
+        // Scope.Add("?");
 
-            // TODO Map any claims
-            // ClaimActions.MapJsonKey(ClaimTypes.Email, "?");
-        }
+        // TODO Map any claims
+        // ClaimActions.MapJsonKey(ClaimTypes.Email, "?");
     }
 }
