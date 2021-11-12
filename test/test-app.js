@@ -108,7 +108,7 @@ describe('aspnet-oauth:app', function () {
   it('sets the handler class name', function () {
     assert.fileContent(
       'AspNet.Security.OAuth.Foo/FooAuthenticationHandler.cs',
-      /public class FooAuthenticationHandler : OAuthHandler<FooAuthenticationOptions>/
+      /public partial class FooAuthenticationHandler : OAuthHandler<FooAuthenticationOptions>/
     );
   });
   it('sets the handler constructor name', function () {
