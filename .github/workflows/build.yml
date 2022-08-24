@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+    branches: [ dev ]
+    paths-ignore:
+    - '**/*.gitattributes'
+    - '**/*.gitignore'
+    - '**/*.md'
+  pull_request:
+    branches: [ dev ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
+    - name: Install packages
+      run: |
+        npm ci
+
+    - name: Test
+      run: |
+        npm test
