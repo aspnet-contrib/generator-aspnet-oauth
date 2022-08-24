@@ -4,6 +4,11 @@
     <TargetFrameworks>$(DefaultNetCoreTargetFramework)</TargetFrameworks>
   </PropertyGroup>
 
+  <!-- This property group required until the new provider is first published to NuGet.org -->
+  <PropertyGroup>
+    <DisablePackageBaselineValidation>true</DisablePackageBaselineValidation>
+  </PropertyGroup>
+
   <PropertyGroup>
     <Description>ASP.NET Core security provider enabling <%= name %> authentication.</Description>
     <Authors><%= authorname %></Authors>
