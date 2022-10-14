@@ -1,19 +1,16 @@
 'use strict';
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
+const Generator = require('yeoman-generator');
+const yosay = require('yosay');
 
-module.exports = yeoman.generators.Base.extend({
-  initializing: function() {
-    this.templatedata = {};
+module.exports = class extends Generator {
 
-    this.log(yosay('Welcome to the classy ' + chalk.yellow('ASP.NET OAuth Provider') + ' generator!'));
-  },
+  initializing() {
+    this.templateData = {};
+    this.log(yosay('Welcome to the classy ASP.NET OAuth Provider generator!'));
+  }
 
-  prompting: function () {
-    var done = this.async();
-
-    var prompts = [{
+  async prompting() {
+    const prompts = [{
       type: 'input',
       name: 'name',
       message: 'What is the name of the provider you want to create?',
@@ -44,25 +41,23 @@ module.exports = yeoman.generators.Base.extend({
       store: true
     }];
 
-    this.prompt(prompts, function (props) {
-      this.templatedata.name = props.name;
-      this.templatedata.authorname = props.authorname;
-      this.templatedata.authorizationendpoint = props.authorizationendpoint;
-      this.templatedata.tokenendpoint = props.tokenendpoint;
-      this.templatedata.userinformationendpoint = props.userinformationendpoint;
+    const answers = await this.prompt(prompts);
 
-      this.name = props.name;
-      this.applicationname = 'AspNet.Security.OAuth.' + props.name
+    this.templateData.name = answers.name;
+    this.templateData.authorname = answers.authorname;
+    this.templateData.authorizationendpoint = answers.authorizationendpoint;
+    this.templateData.tokenendpoint = answers.tokenendpoint;
+    this.templateData.userinformationendpoint = answers.userinformationendpoint;
 
-      done();
-    }.bind(this));
-  },
-
-  writing: function() {
-    this.fs.copyTpl(this.templatePath('Project.csproj'), this.applicationname + '/' + this.applicationname + '.csproj', this.templatedata)
-    this.fs.copyTpl(this.templatePath('AuthenticationDefaults.cs'), this.applicationname + '/' + this.name + 'AuthenticationDefaults.cs', this.templatedata)
-    this.fs.copyTpl(this.templatePath('AuthenticationExtensions.cs'), this.applicationname + '/' + this.name + 'AuthenticationExtensions.cs', this.templatedata)
-    this.fs.copyTpl(this.templatePath('AuthenticationHandler.cs'), this.applicationname + '/' + this.name + 'AuthenticationHandler.cs', this.templatedata)
-    this.fs.copyTpl(this.templatePath('AuthenticationOptions.cs'), this.applicationname + '/' + this.name + 'AuthenticationOptions.cs', this.templatedata)
+    this.name = answers.name;
+    this.applicationName = 'AspNet.Security.OAuth.' + answers.name;
   }
-});
+
+  writing() {
+    this.fs.copyTpl(this.templatePath('Project.csproj'), this.applicationName + '/' + this.applicationName + '.csproj', this.templateData)
+    this.fs.copyTpl(this.templatePath('AuthenticationDefaults.cs'), this.applicationName + '/' + this.name + 'AuthenticationDefaults.cs', this.templateData)
+    this.fs.copyTpl(this.templatePath('AuthenticationExtensions.cs'), this.applicationName + '/' + this.name + 'AuthenticationExtensions.cs', this.templateData)
+    this.fs.copyTpl(this.templatePath('AuthenticationHandler.cs'), this.applicationName + '/' + this.name + 'AuthenticationHandler.cs', this.templateData)
+    this.fs.copyTpl(this.templatePath('AuthenticationOptions.cs'), this.applicationName + '/' + this.name + 'AuthenticationOptions.cs', this.templateData)
+  }
+};
