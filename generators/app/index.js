@@ -64,9 +64,5 @@ module.exports = yeoman.generators.Base.extend({
     this.fs.copyTpl(this.templatePath('AuthenticationExtensions.cs'), this.applicationname + '/' + this.name + 'AuthenticationExtensions.cs', this.templatedata)
     this.fs.copyTpl(this.templatePath('AuthenticationHandler.cs'), this.applicationname + '/' + this.name + 'AuthenticationHandler.cs', this.templatedata)
     this.fs.copyTpl(this.templatePath('AuthenticationOptions.cs'), this.applicationname + '/' + this.name + 'AuthenticationOptions.cs', this.templatedata)
-  },
-
-  install: function () {
-    //this.installDependencies();
   }
 });
