@@ -1,11 +1,12 @@
 'use strict';
 
-const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
+const path = require('path');
 
 describe('aspnet-oauth:app', () => {
-  before(async () => {
+  before(async function () {
+    this.timeout(10000);
     return await helpers.run(path.join(__dirname, '../generators/app'))
       .withOptions({ skipInstall: true })
       .withPrompts({
@@ -42,6 +43,12 @@ describe('aspnet-oauth:app', () => {
     assert.fileContent(
       'AspNet.Security.OAuth.Foo/AspNet.Security.OAuth.Foo.csproj',
       /<PackageTags>foo;aspnetcore;authentication;oauth;security<\/PackageTags>/
+    );
+  });
+  it('sets the package baseline version', () => {
+    assert.fileContent(
+      'AspNet.Security.OAuth.Foo/AspNet.Security.OAuth.Foo.csproj',
+      /<PackageValidationBaselineVersion>[0-9]+\.[0-9]+\.[0-9]+<\/PackageValidationBaselineVersion>/
     );
   });
   it('sets the defaults class name', () => {
