@@ -45,13 +45,13 @@ public partial class <%= name %>AuthenticationHandler : OAuthHandler<<%= name %>
         var endpoint = Options.UserInformationEndpoint;
 
         // TODO Append any additional query string parameters required
-        //endpoint = QueryHelpers.AddQueryString(endpoint, "token", tokens.AccessToken);
+        ////endpoint = QueryHelpers.AddQueryString(endpoint, "token", tokens.AccessToken);
 
         using var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         // TODO Add any HTTP request headers required
-        //request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
+        ////request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
 
         using var response = await Backchannel.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, Context.RequestAborted);
         if (!response.IsSuccessStatusCode)
