@@ -154,7 +154,7 @@ describe('aspnet-oauth:app', () => {
 
       // Clone the providers repository to add the project to
       const clone = spawnSync(
-        `git.exe`,
+        'git',
         ['clone', 'https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers.git', tempDir]);
 
       if (clone.status !== 0 && clone.output) {
