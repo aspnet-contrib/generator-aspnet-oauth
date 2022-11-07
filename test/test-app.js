@@ -191,7 +191,7 @@ describe('aspnet-oauth:app', () => {
       if (process.platform === 'win32') {
         build = spawnSync('build.cmd', ['-test', '-pack', '-configuration', configuration], { cwd: tempDir });
       } else {
-        build = spawnSync('build.sh', ['--test', '--pack', '--configuration', configuration], { cwd: tempDir });
+        build = spawnSync('./build.sh', ['--test', '--pack', '--configuration', configuration], { cwd: tempDir });
       }
 
       if (build.status !== 0 && build.output) {
