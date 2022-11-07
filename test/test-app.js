@@ -1,8 +1,12 @@
 'use strict';
 
 const assert = require('yeoman-assert');
+const glob = require('glob');
 const helpers = require('yeoman-test');
+const os = require('os');
 const path = require('path');
+const { rmSync } = require('fs');
+const { spawnSync } = require('child_process');
 
 describe('aspnet-oauth:app', () => {
   before(async function () {
@@ -134,5 +138,85 @@ describe('aspnet-oauth:app', () => {
       'AspNet.Security.OAuth.Foo/FooAuthenticationOptions.cs',
       /public FooAuthenticationOptions\(\)/
     );
+  });
+
+  describe('generating a new provider', () => {
+
+    const projectName = 'AspNet.Security.OAuth.Foo';
+    const tempDir = path.join(os.tmpdir(), `_generator-aspnet-oauth-${Math.random()}`);
+    const artifactsDir = path.join(tempDir, 'artifacts');
+    const sourceDir = path.join(tempDir, 'src');
+    const projectDir = path.join(sourceDir, projectName);
+    const configuration = 'Release';
+
+    before(async function () {
+      this.timeout(120000);
+
+      // Clone the providers repository to add the project to
+      const clone = spawnSync(
+        `git.exe`,
+        ['clone', 'https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers.git', tempDir]);
+
+      if (clone.status !== 0 && clone.output) {
+        console.error(clone.output.toString('utf8'));
+      }
+      assert.equal(clone.status, 0);
+
+      // Run the generator to create the project
+      context = await helpers.run(path.join(__dirname, '../generators/app'), { tmpdir: false })
+        .cd(sourceDir)
+        .withOptions({ skipInstall: true })
+        .withPrompts({
+          name: 'Foo',
+          authorname: 'John Smith',
+          authorizationendpoint: 'https://foo.local/auth',
+          tokenendpoint: 'https://foo.local/token',
+          userinformationendpoint: 'https://foo.local/user'
+        });
+
+      // Add the new project to the solution
+      const dotnetSlnAdd = spawnSync(
+        `dotnet`,
+        ['sln', 'add', path.join(projectDir, `${projectName}.csproj`)],
+        { cwd: tempDir });
+
+      if (dotnetSlnAdd.status !== 0) {
+        console.error(dotnetSlnAdd.output.toString('utf8'));
+      }
+      assert.equal(dotnetSlnAdd.status, 0);
+
+      // Build the solution, run the tests and generate the NuGet packages
+      let build;
+
+      if (process.platform === 'win32') {
+        build = spawnSync('build.cmd', ['-test', '-pack', '-configuration', configuration], { cwd: tempDir });
+      } else {
+        build = spawnSync('build.sh', ['--test', '--pack', '--configuration', configuration], { cwd: tempDir });
+      }
+
+      if (build.status !== 0 && build.output) {
+        console.error(build.output.toString('utf8'));
+      }
+      assert.equal(build.status, 0);
+    });
+
+    it('compiles the provider', (done) => {
+      const expected = path.join(artifactsDir, 'bin', projectName, configuration, 'net*', `${projectName}.dll`);
+      glob(expected, () => {
+        done();
+      });
+    });
+    it('generates the NuGet package', (done) => {
+      const expected = path.join(artifactsDir, 'packages', configuration, 'Shipping', `${projectName}.*.nupkg`);
+      glob(expected, () => {
+        done();
+      });
+    });
+    it('runs the tests', (done) => {
+      const expected = path.join(artifactsDir, 'TestResults', configuration, 'AspNet.Security.OAuth.Providers.Tests_net*_x64.html');
+      glob(expected, () => {
+        done();
+      });
+    });
   });
 });
