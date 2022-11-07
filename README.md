@@ -1,4 +1,6 @@
-# generator-aspnet-oauth [![Build Status](https://secure.travis-ci.org/aspnet-contrib/generator-aspnet-oauth.png?branch=master)](https://travis-ci.org/aspnet-contrib/generator-aspnet-oauth)
+# generator-aspnet-oauth
+
+[![Build status](https://github.com/aspnet-contrib/generator-aspnet-oauth/workflows/build/badge.svg?branch=dev&event=push)](https://github.com/aspnet-contrib/generator-aspnet-oauth/actions?query=workflow%3Abuild+branch%3Adev+event%3Apush)
 
 > [Yeoman](http://yeoman.io) generator
 
