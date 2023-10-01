@@ -149,7 +149,7 @@ describe('aspnet-oauth:app', () => {
     const configuration = 'Release';
 
     before(async function () {
-      this.timeout(120000);
+      this.timeout(180000);
 
       // Clone the providers repository to add the project to
       const clone = spawnSync(
