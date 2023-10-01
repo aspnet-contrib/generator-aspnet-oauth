@@ -5,13 +5,12 @@ const glob = require('glob');
 const helpers = require('yeoman-test');
 const os = require('os');
 const path = require('path');
-const { rmSync } = require('fs');
 const { spawnSync } = require('child_process');
 
 describe('aspnet-oauth:app', () => {
   before(async function () {
     this.timeout(10000);
-    return await helpers.run(path.join(__dirname, '../generators/app'))
+    await helpers.run(path.join(__dirname, '../generators/app'))
       .withOptions({ skipInstall: true })
       .withPrompts({
         name: 'Foo',
