@@ -1,9 +1,8 @@
 # generator-aspnet-oauth
 
-[![Build status](https://github.com/aspnet-contrib/generator-aspnet-oauth/workflows/build/badge.svg?branch=dev&event=push)](https://github.com/aspnet-contrib/generator-aspnet-oauth/actions?query=workflow%3Abuild+branch%3Adev+event%3Apush)
+[![Build status](https://github.com/aspnet-contrib/generator-aspnet-oauth/actions/workflows/build.yml/badge.svg?branch=dev&event=push)](https://github.com/aspnet-contrib/generator-aspnet-oauth/actions?query=workflow%3Abuild+branch%3Adev+event%3Apush)
 
 > [Yeoman](http://yeoman.io) generator
-
 
 ## Getting Started
 
