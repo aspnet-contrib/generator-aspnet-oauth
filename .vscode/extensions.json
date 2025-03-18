@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "editorconfig.editorconfig",
+    "github.vscode-github-actions",
+    "hbenl.vscode-mocha-test-adapter"
+  ]
+}
