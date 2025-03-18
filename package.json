@@ -26,14 +26,14 @@
     "oauth"
   ],
   "dependencies": {
-    "cross-fetch": "^3.1.5",
+    "cross-fetch": "^4.1.0",
     "query-string": "^7.1.1",
     "yosay": "^2.0.2",
     "yeoman-generator": "^5.7.0"
   },
   "devDependencies": {
-    "glob": "^8.0.3",
-    "mocha": "^10.1.0",
+    "glob": "^11.0.1",
+    "mocha": "^11.1.0",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^6.3.0"
   }

@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('yeoman-assert');
-const glob = require('glob');
+const { glob } = require('glob');
 const helpers = require('yeoman-test');
 const os = require('os');
 const path = require('path');
@@ -199,23 +199,17 @@ describe('aspnet-oauth:app', () => {
       assert.strictEqual(build.status, 0);
     });
 
-    it('compiles the provider', (done) => {
+    it('compiles the provider', async () => {
       const expected = path.join(artifactsDir, 'bin', projectName, configuration, 'net*', `${projectName}.dll`);
-      glob(expected, () => {
-        done();
-      });
+      await glob(expected);
     });
-    it('generates the NuGet package', (done) => {
+    it('generates the NuGet package', async () => {
       const expected = path.join(artifactsDir, 'packages', configuration, 'Shipping', `${projectName}.*.nupkg`);
-      glob(expected, () => {
-        done();
-      });
+      await glob(expected);
     });
-    it('runs the tests', (done) => {
+    it('runs the tests', async () => {
       const expected = path.join(artifactsDir, 'TestResults', configuration, 'AspNet.Security.OAuth.Providers.Tests_net*_x64.html');
-      glob(expected, () => {
-        done();
-      });
+      await glob(expected);
     });
   });
 });
