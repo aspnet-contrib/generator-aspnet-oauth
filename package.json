@@ -29,7 +29,7 @@
     "cross-fetch": "^4.1.0",
     "query-string": "^7.1.1",
     "yosay": "^2.0.2",
-    "yeoman-generator": "^5.7.0"
+    "yeoman-generator": "^7.5.0"
   },
   "devDependencies": {
     "glob": "^11.0.1",
