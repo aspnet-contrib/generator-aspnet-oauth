@@ -159,7 +159,7 @@ describe('aspnet-oauth:app', () => {
       if (clone.status !== 0 && clone.output) {
         console.error(clone.output.toString('utf8'));
       }
-      assert.equal(clone.status, 0);
+      assert.strictEqual(clone.status, 0);
 
       // Run the generator to create the project
       context = await helpers.run(path.join(__dirname, '../generators/app'), { tmpdir: false })
@@ -182,7 +182,7 @@ describe('aspnet-oauth:app', () => {
       if (dotnetSlnAdd.status !== 0) {
         console.error(dotnetSlnAdd.output.toString('utf8'));
       }
-      assert.equal(dotnetSlnAdd.status, 0);
+      assert.strictEqual(dotnetSlnAdd.status, 0);
 
       // Build the solution, run the tests and generate the NuGet packages
       let build;
@@ -196,7 +196,7 @@ describe('aspnet-oauth:app', () => {
       if (build.status !== 0 && build.output) {
         console.error(build.output.toString('utf8'));
       }
-      assert.equal(build.status, 0);
+      assert.strictEqual(build.status, 0);
     });
 
     it('compiles the provider', (done) => {
