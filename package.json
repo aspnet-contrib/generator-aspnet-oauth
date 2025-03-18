@@ -6,7 +6,7 @@
   "main": "app/index.js",
   "repository": "aspnet-contrib/generator-aspnet-oauth",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "author": {
     "name": "Jerrie Pelser",
