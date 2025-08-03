@@ -4,7 +4,10 @@
   "description": "Yeoman generator for OAuth Providers for ASP.NET Core",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "aspnet-contrib/generator-aspnet-oauth",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aspnet-contrib/generator-aspnet-oauth.git"
+  },
   "engines": {
     "node": ">=22"
   },
