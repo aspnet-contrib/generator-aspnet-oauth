@@ -49,7 +49,7 @@
   "prettier": {
     "arrowParens": "always",
     "bracketSpacing": true,
-    "printWidth": 140,
+    "printWidth": 100,
     "quoteProps": "consistent",
     "semi": true,
     "singleQuote": true,

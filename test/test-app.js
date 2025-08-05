@@ -14,14 +14,15 @@ const __dirname = path.dirname(__filename);
 describe('aspnet-oauth:app', () => {
   before(async function () {
     this.timeout(10000);
-    await helpers.run(path.join(__dirname, '../generators/app'))
+    await helpers
+      .run(path.join(__dirname, '../generators/app'))
       .withOptions({ skipInstall: true })
       .withAnswers({
         name: 'Foo',
         authorname: 'John Smith',
         authorizationendpoint: 'https://foo.local/auth',
         tokenendpoint: 'https://foo.local/token',
-        userinformationendpoint: 'https://foo.local/user'
+        userinformationendpoint: 'https://foo.local/user',
       });
   });
 
@@ -31,7 +32,7 @@ describe('aspnet-oauth:app', () => {
       'AspNet.Security.OAuth.Foo/FooAuthenticationDefaults.cs',
       'AspNet.Security.OAuth.Foo/FooAuthenticationExtensions.cs',
       'AspNet.Security.OAuth.Foo/FooAuthenticationHandler.cs',
-      'AspNet.Security.OAuth.Foo/FooAuthenticationOptions.cs'
+      'AspNet.Security.OAuth.Foo/FooAuthenticationOptions.cs',
     ]);
   });
   it('sets the authors name', () => {
@@ -144,7 +145,6 @@ describe('aspnet-oauth:app', () => {
   });
 
   describe('generating a new provider', () => {
-
     const projectName = 'AspNet.Security.OAuth.Foo';
     const tempDir = path.join(os.tmpdir(), `_generator-aspnet-oauth-${Math.random()}`);
     const artifactsDir = path.join(tempDir, 'artifacts');
@@ -156,9 +156,11 @@ describe('aspnet-oauth:app', () => {
       this.timeout(180000);
 
       // Clone the providers repository to add the project to
-      const clone = spawnSync(
-        'git',
-        ['clone', 'https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers.git', tempDir]);
+      const clone = spawnSync('git', [
+        'clone',
+        'https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers.git',
+        tempDir,
+      ]);
 
       if (clone.status !== 0 && clone.output) {
         console.error(clone.output.toString('utf8'));
@@ -166,7 +168,8 @@ describe('aspnet-oauth:app', () => {
       assert.strictEqual(clone.status, 0);
 
       // Run the generator to create the project
-      context = await helpers.run(path.join(__dirname, '../generators/app'), { tmpdir: false })
+      context = await helpers
+        .run(path.join(__dirname, '../generators/app'), { tmpdir: false })
         .cd(sourceDir)
         .withOptions({ skipInstall: true })
         .withPrompts({
@@ -174,14 +177,15 @@ describe('aspnet-oauth:app', () => {
           authorname: 'John Smith',
           authorizationendpoint: 'https://foo.local/auth',
           tokenendpoint: 'https://foo.local/token',
-          userinformationendpoint: 'https://foo.local/user'
+          userinformationendpoint: 'https://foo.local/user',
         });
 
       // Add the new project to the solution
       const dotnetSlnAdd = spawnSync(
         `dotnet`,
         ['sln', 'add', path.join(projectDir, `${projectName}.csproj`)],
-        { cwd: tempDir });
+        { cwd: tempDir }
+      );
 
       if (dotnetSlnAdd.status !== 0) {
         console.error(dotnetSlnAdd.output.toString('utf8'));
@@ -192,9 +196,14 @@ describe('aspnet-oauth:app', () => {
       let build;
 
       if (process.platform === 'win32') {
-        build = spawnSync('build.cmd', ['-test', '-pack', '-configuration', configuration], { cwd: tempDir, shell: true });
+        build = spawnSync('build.cmd', ['-test', '-pack', '-configuration', configuration], {
+          cwd: tempDir,
+          shell: true,
+        });
       } else {
-        build = spawnSync('./build.sh', ['--test', '--pack', '--configuration', configuration], { cwd: tempDir });
+        build = spawnSync('./build.sh', ['--test', '--pack', '--configuration', configuration], {
+          cwd: tempDir,
+        });
       }
 
       if (build.status !== 0 && build.output) {
@@ -204,15 +213,33 @@ describe('aspnet-oauth:app', () => {
     });
 
     it('compiles the provider', async () => {
-      const expected = path.join(artifactsDir, 'bin', projectName, configuration, 'net*', `${projectName}.dll`);
+      const expected = path.join(
+        artifactsDir,
+        'bin',
+        projectName,
+        configuration,
+        'net*',
+        `${projectName}.dll`
+      );
       await glob(expected);
     });
     it('generates the NuGet package', async () => {
-      const expected = path.join(artifactsDir, 'packages', configuration, 'Shipping', `${projectName}.*.nupkg`);
+      const expected = path.join(
+        artifactsDir,
+        'packages',
+        configuration,
+        'Shipping',
+        `${projectName}.*.nupkg`
+      );
       await glob(expected);
     });
     it('runs the tests', async () => {
-      const expected = path.join(artifactsDir, 'TestResults', configuration, 'AspNet.Security.OAuth.Providers.Tests_net*_x64.html');
+      const expected = path.join(
+        artifactsDir,
+        'TestResults',
+        configuration,
+        'AspNet.Security.OAuth.Providers.Tests_net*_x64.html'
+      );
       await glob(expected);
     });
   });

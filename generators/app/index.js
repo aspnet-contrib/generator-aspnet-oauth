@@ -5,43 +5,44 @@ import queryString from 'query-string';
 import yosay from 'yosay';
 
 export default class extends Generator {
-
   initializing() {
     this.templateData = {};
     this.log(yosay('Welcome to the classy ASP.NET OAuth Provider generator!'));
   }
 
   async prompting() {
-    const prompts = [{
-      type: 'input',
-      name: 'name',
-      message: 'What is the name of the provider you want to create?',
-      store: true
-    },
-    {
-      type: 'input',
-      name: 'authorname',
-      message: 'What is your name?',
-      store: true
-    },
-    {
-      type: 'input',
-      name: 'authorizationendpoint',
-      message: 'What is the Authorization Endpoint for this service?',
-      store: true
-    },
-    {
-      type: 'input',
-      name: 'tokenendpoint',
-      message: 'What is the Token Endpoint for this service?',
-      store: true
-    },
-    {
-      type: 'input',
-      name: 'userinformationendpoint',
-      message: 'What is the User Information Endpoint for this service?',
-      store: true
-    }];
+    const prompts = [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What is the name of the provider you want to create?',
+        store: true,
+      },
+      {
+        type: 'input',
+        name: 'authorname',
+        message: 'What is your name?',
+        store: true,
+      },
+      {
+        type: 'input',
+        name: 'authorizationendpoint',
+        message: 'What is the Authorization Endpoint for this service?',
+        store: true,
+      },
+      {
+        type: 'input',
+        name: 'tokenendpoint',
+        message: 'What is the Token Endpoint for this service?',
+        store: true,
+      },
+      {
+        type: 'input',
+        name: 'userinformationendpoint',
+        message: 'What is the User Information Endpoint for this service?',
+        store: true,
+      },
+    ];
 
     const answers = await this.prompt(prompts);
 
@@ -58,15 +59,34 @@ export default class extends Generator {
   }
 
   writing() {
-    this.fs.copyTpl(this.templatePath('Project.csproj'), this.applicationName + '/' + this.applicationName + '.csproj', this.templateData)
-    this.fs.copyTpl(this.templatePath('AuthenticationDefaults.cs'), this.applicationName + '/' + this.name + 'AuthenticationDefaults.cs', this.templateData)
-    this.fs.copyTpl(this.templatePath('AuthenticationExtensions.cs'), this.applicationName + '/' + this.name + 'AuthenticationExtensions.cs', this.templateData)
-    this.fs.copyTpl(this.templatePath('AuthenticationHandler.cs'), this.applicationName + '/' + this.name + 'AuthenticationHandler.cs', this.templateData)
-    this.fs.copyTpl(this.templatePath('AuthenticationOptions.cs'), this.applicationName + '/' + this.name + 'AuthenticationOptions.cs', this.templateData)
+    this.fs.copyTpl(
+      this.templatePath('Project.csproj'),
+      this.applicationName + '/' + this.applicationName + '.csproj',
+      this.templateData
+    );
+    this.fs.copyTpl(
+      this.templatePath('AuthenticationDefaults.cs'),
+      this.applicationName + '/' + this.name + 'AuthenticationDefaults.cs',
+      this.templateData
+    );
+    this.fs.copyTpl(
+      this.templatePath('AuthenticationExtensions.cs'),
+      this.applicationName + '/' + this.name + 'AuthenticationExtensions.cs',
+      this.templateData
+    );
+    this.fs.copyTpl(
+      this.templatePath('AuthenticationHandler.cs'),
+      this.applicationName + '/' + this.name + 'AuthenticationHandler.cs',
+      this.templateData
+    );
+    this.fs.copyTpl(
+      this.templatePath('AuthenticationOptions.cs'),
+      this.applicationName + '/' + this.name + 'AuthenticationOptions.cs',
+      this.templateData
+    );
   }
 
   async getCurrentVersion() {
-
     let response = await fetch('https://api.nuget.org/v3/index.json');
 
     if (!response.ok) {
@@ -74,7 +94,9 @@ export default class extends Generator {
     }
 
     const serviceIndex = await response.json();
-    const baseAddress = serviceIndex.resources.find(resource => resource['@type'] === 'SearchQueryService/3.5.0')['@id'];
+    const baseAddress = serviceIndex.resources.find(
+      (resource) => resource['@type'] === 'SearchQueryService/3.5.0'
+    )['@id'];
 
     if (!baseAddress) {
       throw new Error('Failed to determine the base address for the NuGet search query service.');
@@ -84,14 +106,16 @@ export default class extends Generator {
       prerelease: false,
       q: 'PackageId:AspNet.Security.OAuth.GitHub',
       semVerLevel: '2.0.0',
-      take: 1
+      take: 1,
     });
 
     const searchUrl = `${baseAddress}?${query}`;
     response = await fetch(searchUrl);
 
     if (!response.ok) {
-      throw new Error(`Failed to search for NuGet package from '${searchUrl}'. HTTP status code: ${response.status}.`);
+      throw new Error(
+        `Failed to search for NuGet package from '${searchUrl}'. HTTP status code: ${response.status}.`
+      );
     }
 
     const searchResult = await response.json();
@@ -115,4 +139,4 @@ export default class extends Generator {
 
     return versionParts.join(dot);
   }
-};
+}
