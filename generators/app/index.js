@@ -1,10 +1,10 @@
 'use strict';
-const fetch = require('cross-fetch');
-const Generator = require('yeoman-generator');
-const queryString = require('query-string');
-const yosay = require('yosay');
+import fetch from 'cross-fetch';
+import Generator from 'yeoman-generator';
+import queryString from 'query-string';
+import yosay from 'yosay';
 
-module.exports = class extends Generator {
+export default class extends Generator {
 
   initializing() {
     this.templateData = {};
