@@ -3,6 +3,7 @@
   "version": "9.0.1",
   "description": "Yeoman generator for OAuth Providers for ASP.NET Core",
   "license": "MIT",
+  "type": "module",
   "main": "app/index.js",
   "repository": {
     "type": "git",
@@ -30,14 +31,15 @@
   ],
   "dependencies": {
     "cross-fetch": "^4.1.0",
-    "query-string": "^7.1.1",
-    "yosay": "^2.0.2",
-    "yeoman-generator": "^5.7.0"
+    "query-string": "^9.2.2",
+    "yosay": "^3.0.0",
+    "yeoman-generator": "^7.5.1"
   },
   "devDependencies": {
-    "glob": "^11.0.1",
-    "mocha": "^11.1.0",
+    "glob": "^11.0.3",
+    "mocha": "^11.7.1",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^6.3.0"
+    "yeoman-environment": "^4.4.3",
+    "yeoman-test": "^10.1.1"
   }
 }
