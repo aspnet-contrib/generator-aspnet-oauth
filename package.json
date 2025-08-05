@@ -18,7 +18,10 @@
     "url": "https://github.com/jerriep"
   },
   "scripts": {
-    "test": "mocha"
+    "format": "prettier --write **/*.js",
+    "format-check": "prettier --check **/*.js",
+    "test": "mocha",
+    "all": "npm run format && npm test"
   },
   "files": [
     "generators"
@@ -32,14 +35,26 @@
   "dependencies": {
     "cross-fetch": "^4.1.0",
     "query-string": "^9.2.2",
-    "yosay": "^3.0.0",
-    "yeoman-generator": "^7.5.1"
+    "yeoman-generator": "^7.5.1",
+    "yosay": "^3.0.0"
   },
   "devDependencies": {
     "glob": "^11.0.3",
     "mocha": "^11.7.1",
+    "prettier": "3.6.2",
     "yeoman-assert": "^3.1.1",
     "yeoman-environment": "^4.4.3",
     "yeoman-test": "^10.1.1"
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "printWidth": 140,
+    "quoteProps": "consistent",
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
   }
 }
