@@ -35,7 +35,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
       with:
-        node-version: '22.x'
+        node-version: '24.x'
         registry-url: 'https://registry.npmjs.org'
 
     - name: Update npm
@@ -48,7 +48,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@d4c94342e560b34958eacfc5d055d21461ed1c5d # v5.0.0
       with:
-        dotnet-version: '9.0.x'
+        dotnet-version: '10.0.x'
 
     - name: Lint
       run: |
