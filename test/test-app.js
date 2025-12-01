@@ -1,6 +1,7 @@
 'use strict';
 
-import assert from 'yeoman-assert';
+import assert from 'yeoman-test';
+import asserts from 'assert';
 import { glob } from 'glob';
 import helpers, { result } from 'yeoman-test';
 import os from 'os';
@@ -165,7 +166,7 @@ describe('aspnet-oauth:app', () => {
       if (clone.status !== 0 && clone.output) {
         console.error(clone.output.toString('utf8'));
       }
-      assert.strictEqual(clone.status, 0);
+      asserts.equal(clone.status, 0);
 
       // Run the generator to create the project
       context = await helpers
@@ -190,7 +191,7 @@ describe('aspnet-oauth:app', () => {
       if (dotnetSlnAdd.status !== 0) {
         console.error(dotnetSlnAdd.output.toString('utf8'));
       }
-      assert.strictEqual(dotnetSlnAdd.status, 0);
+      asserts.equal(dotnetSlnAdd.status, 0);
 
       // Build the solution, run the tests and generate the NuGet packages
       let build;
@@ -209,7 +210,7 @@ describe('aspnet-oauth:app', () => {
       if (build.status !== 0 && build.output) {
         console.error(build.output.toString('utf8'));
       }
-      assert.strictEqual(build.status, 0);
+      asserts.equal(build.status, 0);
     });
 
     it('compiles the provider', async () => {
