@@ -1,6 +1,6 @@
 'use strict';
 
-import assert from 'yeoman-assert';
+import assert from 'yeoman-test';
 import { glob } from 'glob';
 import helpers, { result } from 'yeoman-test';
 import os from 'os';
