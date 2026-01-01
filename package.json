@@ -42,7 +42,7 @@
     "glob": "13.0.0",
     "mocha": "11.7.5",
     "prettier": "3.7.3",
-    "yeoman-environment": "5.1.1",
+    "yeoman-environment": "5.1.2",
     "yeoman-test": "11.2.0"
   },
   "prettier": {
