@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "cross-fetch": "4.1.0",
-    "query-string": "9.5.0",
+    "query-string": "9.5.1",
     "yeoman-generator": "8.3.0",
     "yosay": "3.0.0"
   },
